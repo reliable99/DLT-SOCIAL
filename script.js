@@ -11,7 +11,10 @@ const theme = document.querySelector('#theme');
 const themeModal = document.querySelector('.customize-theme');
 const fontSizes = document.querySelectorAll('.choose-size span');
 let root = document.querySelector(':root');
-const colorPalette = document.querySelectorAll('.choose-color span')
+const colorPalette = document.querySelectorAll('.choose-color span');
+const bg1 = document.querySelector('.bg-1');
+const bg2 = document.querySelector('.bg-2');
+const bg3 = document.querySelector('.bg-3');
 
 
 //remove active class from menu items when one is clicked
@@ -113,11 +116,11 @@ fontSizes.forEach(size => {
 
 
 //remove active class from color
-// const changeActiveColor = () => {
-//     colorPalette.forEach(colorpicker => {
-//         color
-//     })
-// }
+const changeActiveColor = () => {
+    colorPalette.forEach(colorpicker => {
+        colorpicker.classList.remove('active')
+    })
+}
 
 
 
@@ -141,4 +144,50 @@ colorPalette.forEach(color => {
         color.classList.add('active');
         root.style.setProperty('--primary-color-hue', primary)
     })
+})
+
+//theme background
+let lightColorLightness;
+let whiteColorLightness;
+let darkColorLightness;
+
+
+// change background
+const changeBg = () => {
+    root.style.setProperty('--light-color-lightness', lightColorLightness)
+    root.style.setProperty('--white-color-lightness', whiteColorLightness)
+    root.style.setProperty('--dark-color-lightness', darkColorLightness)
+}
+
+bg1.addEventListener('click', () => {
+
+    bg1.classList.add('active');
+
+    bg2.classList.remove('active')
+    bg3.classList.remove('active')
+
+    window.location.reload();
+
+})
+
+bg2.addEventListener('click', () => {
+    lightColorLightness = '15%';
+    whiteColorLightness = '20%';
+    darkColorLightness = '95%';
+
+    bg2.classList.add('active');
+    bg1.classList.remove('active');
+    bg3.classList.remove('active');
+    changeBg()
+})
+
+bg3.addEventListener('click', () => {
+    lightColorLightness = '0%';
+    whiteColorLightness = '10%';
+    darkColorLightness = '95%';
+
+    bg3.classList.add('active')
+    bg1.classList.remove('active')
+    bg2.classList.remove('active')
+    changeBg()
 })
